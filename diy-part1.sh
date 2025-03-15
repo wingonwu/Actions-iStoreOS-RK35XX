@@ -42,4 +42,4 @@ echo 'src-git xmpackage https://github.com/xiaomeng9597/openwrt-packages2.git;ma
 
 # 添加科学上网插件
 # echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
-echo "src-git OpenClash https://github.com/vernesong/OpenClash.git;master" >> "feeds.conf.default"
+# echo "src-git OpenClash https://github.com/vernesong/OpenClash.git;master" >> "feeds.conf.default"

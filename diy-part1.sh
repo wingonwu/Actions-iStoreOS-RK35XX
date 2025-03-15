@@ -37,9 +37,9 @@ sed -i "s/DISTRIB_DESCRIPTION.*/DISTRIB_DESCRIPTION='%D %V ${date_version} by ${
 sed -i "s/OPENWRT_RELEASE.*/OPENWRT_RELEASE=\"%D %V ${date_version} by ${author}\"/g" package/base-files/files/usr/lib/os-release
 
 # 拉取我的软件包仓库
-echo 'src-git xmpackage https://github.com/xiaomeng9597/openwrt-packages2.git;main' >> feeds.conf.default
+echo 'src-git xiaomeng9597 https://github.com/xiaomeng9597/openwrt-packages2.git;main' >> feeds.conf.default
 
 
 # 添加科学上网插件
-# echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
-# echo "src-git OpenClash https://github.com/vernesong/OpenClash.git;master" >> "feeds.conf.default"
+echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
+echo "src-git OpenClash https://github.com/vernesong/OpenClash.git;master" >> "feeds.conf.default"

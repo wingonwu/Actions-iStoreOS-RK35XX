@@ -18,8 +18,3 @@ sed -i "s/OPENWRT_RELEASE.*/OPENWRT_RELEASE=\"%D %V ${date_version} by ${author}
 
 # 拉取我的软件包仓库
 echo 'src-git xmpackage https://github.com/xiaomeng9597/openwrt-packages2.git;main' >> feeds.conf.default
-
-
-# 添加科学上网插件
-echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
-echo "src-git OpenClash https://github.com/vernesong/OpenClash.git;main" >> "feeds.conf.default"

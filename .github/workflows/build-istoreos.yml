@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions “ture 开启”'
+        description: 'SSH connection to Actions “true” Enable'
         required: false
         default: 'false'
   schedule:

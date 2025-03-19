@@ -179,6 +179,9 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-eqosplus package/luci-a
 
 # OpenClash 添加内核文件，以及 GeoIP 数据库、GeoSite 数据库
 
+# sed -i "/mkdir -p \$(PKG_BUILD_DIR)\/root\/usr\/share\/openclash\/backup/a \\
+# cp -f \"\$(PKG_BUILD_DIR)/root/etc/openclash/core/clash_meta\" \"\$(PKG_BUILD_DIR)/root/usr/share/openclash/core/clash_meta\" >\/dev\/null 2>\&1" feeds/OpenClash/luci-app-openclash/Makefile
+
 ##------------- meta core ---------------------------------
 curl -sL -m 30 --retry 2 https://raw.githubusercontent.com/vernesong/OpenClash/core/master/meta/clash-linux-arm64.tar.gz -o /tmp/clash.tar.gz
 tar zxvf /tmp/clash.tar.gz -C /tmp >/dev/null 2>&1
@@ -186,8 +189,3 @@ chmod +x /tmp/clash >/dev/null 2>&1
 mkdir feeds/OpenClash/luci-app-openclash/root/etc/openclash/core
 mv /tmp/clash feeds/OpenClash/luci-app-openclash/root/etc/openclash/core/clash_meta >/dev/null 2>&1
 rm -rf /tmp/clash.tar.gz >/dev/null 2>&1
-
-##---------------------------------------------------------
-##-------------- GeoIP 数据库 -----------------------------
-curl -sL -m 30 --retry 2 https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -o /tmp/GeoIP.dat
-mv /tmp/GeoIP.dat feeds/OpenClash/luci-app-openclash/root/etc/openclash/GeoIP.dat >/dev/null 2>&1

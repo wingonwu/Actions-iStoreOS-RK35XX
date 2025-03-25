@@ -102,12 +102,37 @@ chmod 755 package/base-files/files/etc/init.d/swconfig_install
 # cp -f $GITHUB_WORKSPACE/configfiles/mt7916_eeprom.bin package/base-files/files/lib/firmware/mediatek/mt7916_eeprom.bin
 
 
-
+# rtl8367交换机
+echo -e "CONFIG_RTL83XX_API_RTL8367C=y
+CONFIG_RTL83XX_CHIP_DETECT=y
+# CONFIG_RTL83XX_CIF_MDIO is not set
+CONFIG_RTL83XX_CIF_SMI=y
+# CONFIG_RTL83XX_CIF_SPI is not set
+# CONFIG_RTL83XX_EXT0_DISABLE is not set
+# CONFIG_RTL83XX_EXT0_HSGMII is not set
+# CONFIG_RTL83XX_EXT0_MII is not set
+CONFIG_RTL83XX_EXT0_RGMII=y
+# CONFIG_RTL83XX_EXT0_SGMII is not set
+# CONFIG_RTL83XX_EXT1_DISABLE is not set
+# CONFIG_RTL83XX_EXT1_HSGMII is not set
+# CONFIG_RTL83XX_EXT1_MII is not set
+CONFIG_RTL83XX_EXT1_RGMII=y
+# CONFIG_RTL83XX_EXT1_SGMII is not set
+CONFIG_RTL83XX_GSW=y
+CONFIG_RTL83XX_IGMP_SNOOPING=y
+# CONFIG_RTL83XX_LAN_CPU_EXT0 is not set
+CONFIG_RTL83XX_LAN_CPU_EXT1=y
+CONFIG_RTL83XX_PORT_WAN=0
+CONFIG_RTL83XX_RGMII_DELAY_RX=1
+CONFIG_RTL83XX_RGMII_DELAY_TX=1
+CONFIG_RTL83XX_SMI_BUS_CPU_GPIO_CLCK=2
+CONFIG_RTL83XX_SMI_BUS_CPU_GPIO_DATA=1
+CONFIG_RTL83XX_SWCONFIG=y" >> target/linux/rockchip/rk35xx/config-5.10
 
 # 删除会导致编译失败的补丁
-rm -f target/linux/generic/hack-5.10/747-1-rtl8367b-support-rtl8367s.patch
-rm -f target/linux/generic/hack-5.10/747-2-rtl8366_smi-phy-id.patch
-rm -f target/linux/generic/hack-5.10/744-rtl8366_smi-fix-ce-debugfs.patch
+# rm -f target/linux/generic/hack-5.10/747-1-rtl8367b-support-rtl8367s.patch
+# rm -f target/linux/generic/hack-5.10/747-2-rtl8366_smi-phy-id.patch
+# rm -f target/linux/generic/hack-5.10/744-rtl8366_smi-fix-ce-debugfs.patch
 
 
 

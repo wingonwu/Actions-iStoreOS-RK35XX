@@ -68,3 +68,6 @@ CONFIG_PACKAGE_luci-app-openclash=y
 # Boot Loaders
 CONFIG_PACKAGE_uboot-envtools=y
 # end of Boot Loaders
+
+CONFIG_DEFAULT_uboot-envtools=y
+# CONFIG_DEFAULT_uboot-rockchip-rk3568-nsy-g68=y

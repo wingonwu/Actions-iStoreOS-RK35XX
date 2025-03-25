@@ -105,9 +105,9 @@ chmod 755 package/base-files/files/etc/init.d/swconfig_install
 
 
 # 删除会导致编译失败的补丁
-rm -f target/linux/generic/hack-5.10/747-1-rtl8367b-support-rtl8367s.patch
-rm -f target/linux/generic/hack-5.10/747-2-rtl8366_smi-phy-id.patch
-rm -f target/linux/generic/hack-5.10/744-rtl8366_smi-fix-ce-debugfs.patch
+# rm -f target/linux/generic/hack-5.10/747-1-rtl8367b-support-rtl8367s.patch
+# rm -f target/linux/generic/hack-5.10/747-2-rtl8366_smi-phy-id.patch
+# rm -f target/linux/generic/hack-5.10/744-rtl8366_smi-fix-ce-debugfs.patch
 
 
 

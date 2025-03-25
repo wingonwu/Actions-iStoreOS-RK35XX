@@ -112,8 +112,8 @@ rm -f target/linux/generic/hack-5.10/744-rtl8366_smi-fix-ce-debugfs.patch
 
 
 # 电工大佬的rtl8367b驱动资源包，暂时使用这样替换
-wget https://github.com/xiaomeng9597/files/releases/download/files/rtl8367b.tar.gz
-tar -xvf rtl8367b.tar.gz
+# wget https://github.com/xiaomeng9597/files/releases/download/files/rtl8367b.tar.gz
+# tar -xvf rtl8367b.tar.gz
 
 
 # openwrt主线rtl8367b驱动资源包，暂时使用这样替换

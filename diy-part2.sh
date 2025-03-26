@@ -141,8 +141,8 @@ CONFIG_RTL83XX_SWCONFIG=y" >> target/linux/rockchip/rk35xx/config-5.10
 
 
 # 电工大佬的rtl8367b驱动资源包，暂时使用这样替换
-# wget https://github.com/xiaomeng9597/files/releases/download/files/rtl8367b.tar.gz
-# tar -xvf rtl8367b.tar.gz
+wget https://github.com/xiaomeng9597/files/releases/download/files/rtl8367b.tar.gz
+tar -xvf rtl8367b.tar.gz
 
 
 # openwrt主线rtl8367b驱动资源包，暂时使用这样替换

@@ -5930,28 +5930,62 @@
 		reg = <0x00 0xfd90c000 0x00 0x1000 0x00 0xfd90d000 0x00 0x1000 0x00 0xfd90e000 0x00 0x1000 0x00 0xfd90f000 0x00 0x1000>;
 	};
 
-	rtlgsw@0 {
-		compatible = "realtek,rtl8367b", "realtek,rtl8367s";
-		realtek,mdio = <0x158>;
-		mii-bus = <0x158>;
-		realtek,id = <29>;
-		phy-id = <29>;
-		cpu_port = <0x07>;
+	rtl8367s@0 {
+		#address-cells = <1>;
+		#size-cells = <0>;
 
-		//======================================================
-		//对于主线op的设备树书写方式
-		//realtek,extif = <7 0 0 1 1 1 1 1 1 2>;
-		//======================================================
+		compatible = "realtek,rtl83xx-gsw";
+		realtek,mdio = <&mdio0>;
+		realtek,phy_addr = <29>;
 
-		//延迟为0,否则网络很卡
-		//realtek,extif = <7 0 0 1 1 1 1 1 1 2>;
-		//realtek,extif1 = <7 0 0 1 1 1 1 1 1 2>;
-		//txdelay, rxdelay, mode, ability.force_mode, ability.txpause, ability.rxpause, ability.link, ability.duplex, speed
+		pinctrl-names = "default";
+		pinctrl-0 = <&rtl8367s_switch0_int>;
 
-		//sgmii,
-		realtek,extif1 = <0 0 11 1 1 1 1 1 2>;
-		//rgmii
-		realtek,extif2 = <0 0 1 1 1 1 1 1 2>;
+		interrupt-parent = <&gpio3>;
+		interrupts = <RK_PC0 IRQ_TYPE_LEVEL_LOW>;
+
+		realtek,cpuport = <5>;
+		realtek,reset-pin = <&gpio1 RK_PB0 GPIO_ACTIVE_LOW>;
+		realtek,led_active_low;
+
+		/* mode: off link_act link_tx link_rx */
+		realtek,led_group_0 = "spd_1000";
+		realtek,led_group_1 = "link_tx";
+
 		status = "okay";
+
+		extif0: extif@0 {
+			compatible = "realtek,extif";
+			reg = <0>;
+			phy-mode = "sgmii";
+			realtek,tx-pause;
+			realtek,rx-pause;
+
+			fixed-link {
+				speed = <1000>;
+				full-duplex;
+			};
+		};
+
+		extif1: extif@1 {
+			compatible = "realtek,extif";
+			reg = <1>;
+			phy-mode = "rgmii";
+			realtek,tx-pause;
+			realtek,rx-pause;
+
+			fixed-link {
+				speed = <1000>;
+				full-duplex;
+			};
+		};
 	};
+
+&pinctrl {
+	rtl83xx_switches {
+		rtl8367s_switch0_int: switch0-int {
+			rockchip,pins = <1 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+};
 };

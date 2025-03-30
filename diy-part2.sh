@@ -103,7 +103,7 @@ chmod 755 package/base-files/files/etc/init.d/swconfig_install
 # cp -f $GITHUB_WORKSPACE/configfiles/mt7916_eeprom.bin package/base-files/files/lib/firmware/mediatek/mt7916_eeprom.bin
 
 
-
+: <<"EOF"
 
 # rtl8367交换机
 sed -i "/.*CONFIG_RTL83XX.*/d" target/linux/rockchip/rk35xx/config-5.10
@@ -132,6 +132,7 @@ CONFIG_RTL83XX_RGMII_DELAY_TX=1
 CONFIG_RTL83XX_SMI_BUS_CPU_GPIO_CLCK=2
 CONFIG_RTL83XX_SMI_BUS_CPU_GPIO_DATA=1
 CONFIG_RTL83XX_SWCONFIG=y" >> target/linux/rockchip/rk35xx/config-5.10
+EOF
 
 
 # 删除会导致编译失败的补丁

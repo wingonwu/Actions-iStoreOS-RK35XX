@@ -22,16 +22,21 @@ sed -i "s/push @mirrors, 'https:\/\/mirror2.openwrt.org\/sources';/&\\npush @mir
 
 
 # 修改内核配置文件
-echo 替换内核配置文件 config
-cp -f $GITHUB_WORKSPACE/rk35xx/config-5.10 target/linux/rockchip/rk35xx/config-5.10
-echo 查找内核 config 文件
+#echo 替换内核配置文件 config
+#cp -f $GITHUB_WORKSPACE/rk35xx/config-5.10 target/linux/rockchip/rk35xx/config-5.10
+#echo 查找内核 config 文件
 ls -l target/linux/rockchip/rk35xx/config-5.10
+
+
 
 # sed -i "/.*CONFIG_ROCKCHIP_RGA2.*/d" target/linux/rockchip/rk35xx/config-5.10
 # sed -i "/# CONFIG_ROCKCHIP_RGA2 is not set/d" target/linux/rockchip/rk35xx/config-5.10
 # sed -i "/CONFIG_ROCKCHIP_RGA2_DEBUGGER=y/d" target/linux/rockchip/rk35xx/config-5.10
 # sed -i "/CONFIG_ROCKCHIP_RGA2_DEBUG_FS=y/d" target/linux/rockchip/rk35xx/config-5.10
 # sed -i "/CONFIG_ROCKCHIP_RGA2_PROC_FS=y/d" target/linux/rockchip/rk35xx/config-5.10
+
+
+# 修改内核配置文件 开启 GPU
 # sudo sed -i 's/^# CONFIG_MALI400 is not set$/CONFIG_MALI400=y/' target/linux/rockchip/rk35xx/config-5.10
 
 
@@ -86,12 +91,9 @@ chmod 755 package/base-files/files/bin/coremark
 chmod 755 package/base-files/files/bin/coremark.sh
 
 
-
-
-
-
-sed -i "s/192.168.100.1/192.168.200.1/g" package/base-files/files/bin/config_generate
-sed -i "s/192.168.1.1/192.168.200.1/g" package/base-files/files/bin/config_generate
+# 修改内网IP地址为 10.0.0.1
+sed -i "s/192.168.100.1/10.0.0.1/g" package/base-files/files/bin/config_generate
+sed -i "s/192.168.1.1/10.0.0.1/g" package/base-files/files/bin/config_generate
 
 
 # 加入nsy_g68-plus初始化网络配置脚本
@@ -107,9 +109,8 @@ chmod 755 package/base-files/files/etc/init.d/swconfig_install
 # cp -f $GITHUB_WORKSPACE/configfiles/mt7916_eeprom.bin package/base-files/files/lib/firmware/mediatek/mt7916_eeprom.bin
 
 
-: <<"EOF"
 
-# rtl8367交换机
+# 内核配置文件添加 rtl8367 交换机配置选项
 sed -i "/.*CONFIG_RTL83XX.*/d" target/linux/rockchip/rk35xx/config-5.10
 echo -e "CONFIG_RTL83XX_API_RTL8367C=y
 CONFIG_RTL83XX_CHIP_DETECT=y
@@ -136,7 +137,6 @@ CONFIG_RTL83XX_RGMII_DELAY_TX=1
 CONFIG_RTL83XX_SMI_BUS_CPU_GPIO_CLCK=2
 CONFIG_RTL83XX_SMI_BUS_CPU_GPIO_DATA=1
 CONFIG_RTL83XX_SWCONFIG=y" >> target/linux/rockchip/rk35xx/config-5.10
-EOF
 
 
 # 删除会导致编译失败的补丁
@@ -203,7 +203,7 @@ endef
 TARGET_DEVICES += bdy_g18-pro" >> target/linux/rockchip/image/rk35xx.mk
 
 
-
+# 增加bdy_g18-pro 增加nsy_g16-plus 增加nsy_g68-plus dts 文件
 cp -f $GITHUB_WORKSPACE/configfiles/rk3568-nsy-g68-plus.dts target/linux/rockchip/dts/rk3568/rk3568-nsy-g68-plus.dts
 cp -f $GITHUB_WORKSPACE/configfiles/rk3568-nsy-g16-plus.dts target/linux/rockchip/dts/rk3568/rk3568-nsy-g16-plus.dts
 cp -f $GITHUB_WORKSPACE/configfiles/rk3568-bdy-g18-pro.dts target/linux/rockchip/dts/rk3568/rk3568-bdy-g18-pro.dts
@@ -213,12 +213,7 @@ cp -f $GITHUB_WORKSPACE/configfiles/rk3568-bdy-g18-pro.dts target/linux/rockchip
 git clone --depth=1 https://github.com/sirpdboy/luci-app-eqosplus package/luci-app-eqosplus
 
 
-# OpenClash 添加内核文件，以及 GeoIP 数据库、GeoSite 数据库
-
-# sed -i "/mkdir -p \$(PKG_BUILD_DIR)\/root\/usr\/share\/openclash\/backup/a \\
-# cp -f \"\$(PKG_BUILD_DIR)/root/etc/openclash/core/clash_meta\" \"\$(PKG_BUILD_DIR)/root/usr/share/openclash/core/clash_meta\" >\/dev\/null 2>\&1" feeds/OpenClash/luci-app-openclash/Makefile
-
-##------------- meta core ---------------------------------
+# OpenClash 添加内核文件
 curl -sL -m 30 --retry 2 https://raw.githubusercontent.com/vernesong/OpenClash/core/master/meta/clash-linux-arm64.tar.gz -o /tmp/clash.tar.gz
 tar zxvf /tmp/clash.tar.gz -C /tmp >/dev/null 2>&1
 chmod +x /tmp/clash >/dev/null 2>&1

@@ -5933,7 +5933,7 @@
 	rtlgsw@0 {
 		#address-cells = <0x01>;
 		#size-cells = <0x00>;
-		compatible = "realtek,rtl83xx-gsw" "realtek,rtl8367b", "realtek,rtl8367s";
+		compatible = "realtek,rtl8367s", "realtek,rtl83xx-gsw";
 		realtek,mdio = <0x116>;
 		realtek,phy_addr = <0x1d>;
 		pinctrl-names = "default";

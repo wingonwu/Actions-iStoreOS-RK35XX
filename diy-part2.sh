@@ -204,7 +204,11 @@ TARGET_DEVICES += bdy_g18-pro" >> target/linux/rockchip/image/rk35xx.mk
 
 
 # 增加bdy_g18-pro 增加nsy_g16-plus 增加nsy_g68-plus dts 文件
+# 复制 rk3568-demo-rtl8367s.dts 测试
 cp -f target/linux/rockchip/dts/rk3568/rk3568-demo-rtl8367s.dts target/linux/rockchip/dts/rk3568/rk3568-nsy-g68-plus.dts
+# 修改 dts 设备名
+sed -i 's|^[[:space:]]*compatible[[:space:]]*=[[:space:]]*"demo,rtl8367s", "rockchip,rk3568";|    model = "NSY-G68 AX3000 Router";\n    compatible = "nsy,g68-plus", "rockchip,rk3568";|g' target/linux/rockchip/dts/rk3568/rk3568-nsy-g68-plus.dt
+
 # cp -f $GITHUB_WORKSPACE/configfiles/rk3568-nsy-g68-plus.dts target/linux/rockchip/dts/rk3568/rk3568-nsy-g68-plus.dts
 cp -f $GITHUB_WORKSPACE/configfiles/rk3568-nsy-g16-plus.dts target/linux/rockchip/dts/rk3568/rk3568-nsy-g16-plus.dts
 cp -f $GITHUB_WORKSPACE/configfiles/rk3568-bdy-g18-pro.dts target/linux/rockchip/dts/rk3568/rk3568-bdy-g18-pro.dts
